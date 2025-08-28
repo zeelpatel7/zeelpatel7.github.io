@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeel Patel - Data Scientist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Poppins:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #1E1E1E;
+            --bg-secondary: #2C2C2C;
+            --text-primary: #FFFFFF;
+            --text-secondary: #E6E6E6;
+            --accent-teal: #00BFA6;
+            --accent-purple: #8E7DFF;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --glow-teal: 0 0 20px rgba(0, 191, 166, 0.3);
+            --glow-purple: 0 0 20px rgba(142, 125, 255, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-secondary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(30, 30, 30, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-teal);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-teal);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: clamp(3rem, 8vw, 6rem);
+            color: var(--text-primary);
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .typewriter {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--accent-teal);
+            margin-bottom: 2rem;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent-teal), var(--accent-purple));
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--glow-teal), var(--shadow);
+        }
+
+        /* Section Styling */
+        .section {
+            min-height: 80vh;
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 3rem;
+            color: var(--text-primary);
+            text-align: center;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-teal);
+            box-shadow: var(--glow-teal);
+        }
+
+        .skill-card i {
+            font-size: 3rem;
+            color: var(--accent-teal);
+            margin-bottom: 1rem;
+        }
+
+        .skill-card h3 {
+            color: var(--text-primary);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-secondary);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-teal);
+            box-shadow: var(--glow-teal);
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-card h3 {
+            color: var(--text-primary);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .project-description {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: var(--accent-purple);
+            color: var(--text-primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--accent-purple);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 3rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            background: var(--accent-teal);
+            border-radius: 50%;
+            box-shadow: var(--glow-teal);
+        }
+
+        .timeline-date {
+            color: var(--accent-teal);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            color: var(--text-primary);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-company {
+            color: var(--accent-purple);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        /* Volunteering Section */
+        .volunteer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .volunteer-card {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .volunteer-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-purple);
+            box-shadow: var(--glow-purple);
+        }
+
+        .volunteer-card h3 {
+            color: var(--text-primary);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .volunteer-org {
+            color: var(--accent-teal);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        /* Publications & Certifications */
+        .pub-cert-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .publication-item, .cert-category {
+            margin-bottom: 2rem;
+        }
+
+        .publication-item h4 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .journal {
+            color: var(--accent-teal);
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-category h4 {
+            color: var(--accent-purple);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-purple);
+            padding-bottom: 0.5rem;
+        }
+
+        .cert-list {
+            list-style: none;
+        }
+
+        .cert-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Hobbies Section */
+        .hobbies-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 3rem;
+        }
+
+        .hobby-item {
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .hobby-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .hobby-item i {
+            font-size: 4rem;
+            color: var(--accent-teal);
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .hobby-item:hover i {
+            color: var(--accent-purple);
+            text-shadow: var(--glow-purple);
+        }
+
+        .hobby-item span {
+            display: block;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .footer-tagline {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: var(--text-secondary);
+            font-size: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-teal);
+            text-shadow: var(--glow-teal);
+            transform: translateY(-3px);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .pub-cert-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .section {
+                padding: 3rem 1rem;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-teal);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-purple);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">ZEEL PATEL</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>ZEEL PATEL</h1>
+            <div class="typewriter" id="typewriter"></div>
+            <div class="hero-buttons">
+                <a href="mailto:zeelpatel0501@gmail.com" class="btn">
+                    <i class="fas fa-envelope"></i> Contact Me
+                </a>
+                <a href="https://linkedin.com/in/zeelpatel7" class="btn" target="_blank">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+                <a href="https://github.com/zeelpatel7" class="btn" target="_blank">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>I'm Zeel Patel, a data scientist with a knack for turning complex data into actionable strategies. With a master's in Applied Data Science from the University of Chicago and experience across startups, research labs, and Fortune 500 consulting, I've built predictive models, automated pipelines, and dashboards that drive real-world decisions.</p>
+                <br>
+                <p>My edge lies at the intersection of analytics, engineering, and strategy — whether it's optimizing cloud platforms, leading AI integration sprints, or building systems that scale. I'm passionate about creating tools that empower people, not just process data.</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>Machine Learning & AI</h3>
+                    <p>PyTorch, TensorFlow, scikit-learn, XGBoost, Hugging Face</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-chart-bar"></i>
+                    <h3>Applied Analytics</h3>
+                    <p>Python, SQL, R, Tableau, Power BI</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-tools"></i>
+                    <h3>Data Science Toolkit</h3>
+                    <p>Data wrangling, EDA, Statistical modeling</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-rocket"></i>
+                    <h3>MLOps & Data Engineering</h3>
+                    <p>PySpark, BigQuery, Hadoop, GCP, AWS, Docker</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-cloud"></i>
+                    <h3>Cloud & Systems</h3>
+                    <p>GCP, AWS, Big Data infrastructure, HPC</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-content">
+                    <h3>CheXRetriever</h3>
+                    <p class="project-description">Multimodal Medical Imaging Search system that maps free-text radiology impressions to chest X-rays using Bio_ClinicalBERT, ViT, and ResNet, achieving Recall@5 of 0.4464 for diagnostic decision support.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">BERT</span>
+                        <span class="tech-tag">ViT</span>
+                        <span class="tech-tag">Medical AI</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-content">
+                    <h3>AlgoTradeX</h3>
+                    <p class="project-description">Automated Trading System built with real-time trading bot using Alpaca API, Docker, and AWS EC2, enabling fault-tolerant 24/7 trade execution with CI/CD automation.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">AWS</span>
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">Alpaca API</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-content">
+                    <h3>Crude-Gasoline Dynamics</h3>
+                    <p class="project-description">Forecasting Energy Arbitrage using ECM, VAR, ARIMAX, and LSTM models to forecast gasoline prices and guide trading strategies in energy markets.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Time Series</span>
+                        <span class="tech-tag">LSTM</span>
+                        <span class="tech-tag">Financial Analytics</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-content">
+                    <h3>TuringBots vs Human Developers</h3>
+                    <p class="project-description">Analyzed 1.36 TiB of GitHub data on GCP to study AI-assisted coding trends, repo growth, and developer productivity patterns in the age of AI.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Big Data</span>
+                        <span class="tech-tag">GCP</span>
+                        <span class="tech-tag">Analytics</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-content">
+                    <h3>Yelp Business Success Analysis</h3>
+                    <p class="project-description">Engineered a full pipeline to analyze Yelp's Open Dataset, identifying key drivers of high restaurant ratings (≥4.5★) and building an actionable playbook for operators.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Data Pipeline</span>
+                        <span class="tech-tag">ML</span>
+                        <span class="tech-tag">Business Analytics</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-content">
+                    <h3>Web App Vulnerability Prediction</h3>
+                    <p class="project-description">Predicted web app vulnerabilities using Poisson and Negative Binomial regression for proactive cybersecurity planning and risk assessment.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Cybersecurity</span>
+                        <span class="tech-tag">Regression</span>
+                        <span class="tech-tag">Risk Analysis</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <h2 class="section-title">Experience</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">Jun 2025 – Present</div>
+                <div class="timeline-title">Research Assistant</div>
+                <div class="timeline-company">UChicago Data Science Institute</div>
+                <p>Optimizing HPC infrastructure and designing scalable data warehouses for advanced analytics.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Mar 2025 – Present</div>
+                <div class="timeline-title">Data Scientist (Capstone)</div>
+                <div class="timeline-company">Aetna, a CVS Health Company</div>
+                <p>Built predictive risk models and executive dashboards to drive data-informed strategy.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Jun 2025 – Aug 2025</div>
+                <div class="timeline-title">Data Science Intern</div>
+                <div class="timeline-company">1871 (Google for Startups)</div>
+                <p>Led AI sprint initiatives and developed KPI monitoring dashboards for 100+ startups.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Jul 2023 – Aug 2024</div>
+                <div class="timeline-title">Consultant (Cyber & Strategic Risk)</div>
+                <div class="timeline-company">Deloitte</div>
+                <p>Conducted ITGC risk assessments and reduced high-risk classifications through control remediation.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Jul 2020 – Aug 2024</div>
+                <div class="timeline-title">Founder & President</div>
+                <div class="timeline-company">Girl Up Athena (UN Foundation Initiative)</div>
+                <p>Founded and scaled a social impact organization, leading education and health initiatives.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Feb 2022 – Jul 2022</div>
+                <div class="timeline-title">Data Science Intern</div>
+                <div class="timeline-company">Wipro</div>
+                <p>Supported development of analytics solutions and data-driven decision tools.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Volunteering Section -->
+    <section class="section">
+        <h2 class="section-title">Volunteering</h2>
+        <div class="volunteer-grid">
+            <div class="volunteer-card">
+                <h3>Member</h3>
+                <div class="volunteer-org">Association for Women in Science</div>
+                <p>Engaging in mentorship, networking, and advocacy initiatives to support women in STEM.</p>
+            </div>
+            <div class="volunteer-card">
+                <h3>Head of Publicity & External Affairs</h3>
+                <div class="volunteer-org">PICT Model United Nations</div>
+                <p>Directed publicity campaigns and secured sponsorships, increasing delegate participation by 40%.</p>
+            </div>
+            <div class="volunteer-card">
+                <h3>Volunteer</h3>
+                <div class="volunteer-org">NASCAR Chicago Street Race</div>
+                <p>Assisted event operations and logistics for a large-scale sporting event.</p>
+            </div>
+            <div class="volunteer-card">
+                <h3>Social Media Manager</h3>
+                <div class="volunteer-org">PICT IEEE Student Branch (PISB)</div>
+                <p>Managed social media campaigns to drive engagement and event participation.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications & Certifications -->
+    <section class="section">
+        <h2 class="section-title">Publications & Certifications</h2>
+        <div class="pub-cert-content">
+            <div>
+                <h3 style="color: var(--accent-teal); margin-bottom: 2rem; font-family: 'Poppins', sans-serif;">Publications</h3>
+                <div class="publication-item">
+                    <h4>Comparative Analysis of AI Chatbots: Efficiency Across Key Parameters</h4>
+                    <div class="journal">Gradiva Review Journal, Oct 2023</div>
+                    <p>Benchmarked five chatbot architectures on speed, code accuracy, and contextual understanding.</p>
+                </div>
+                <div class="publication-item">
+                    <h4>Data-Driven Quantitative Risk Modelling in Financial Engineering</h4>
+                    <div class="journal">Gradiva Review Journal, Sep 2023</div>
+                    <p>Explored VaR, CVaR, and advanced analytics for market, credit, and operational risk.</p>
+                </div>
+                <div class="publication-item">
+                    <h4>Dynamic Pricing Model for Freight Transportation Services</h4>
+                    <div class="journal">TIJER, Jul 2023</div>
+                    <p>Proposed data-driven dynamic pricing strategies for freight operations optimization.</p>
+                </div>
+            </div>
+            <div>
+                <h3 style="color: var(--accent-purple); margin-bottom: 2rem; font-family: 'Poppins', sans-serif;">Key Certifications</h3>
+                <div class="cert-category">
+                    <h4>Data Science & Analytics</h4>
+                    <ul class="cert-list">
+                        <li>Google Data Analytics Specialization</li>
+                        <li>Python and Statistics for Financial Analysis - HKUST</li>
+                        <li>R Essential Training: Wrangling and Visualizing Data</li>
+                    </ul>
+                </div>
+                <div class="cert-category">
+                    <h4>AI & Generative AI</h4>
+                    <ul class="cert-list">
+                        <li>Career Essentials in Generative AI - Microsoft & LinkedIn</li>
+                    </ul>
+                </div>
+                <div class="cert-category">
+                    <h4>Cloud & Risk Management</h4>
+                    <ul class="cert-list">
+                        <li>AWS Cloud Practitioner Essentials</li>
+                        <li>ISO 27001 Lead Auditor (Information Security)</li>
+                        <li>Certified Risk Management Expert | ISO 31000:2018</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hobbies Section -->
+    <section class="section">
+        <h2 class="section-title">Beyond Data</h2>
+        <div class="hobbies-grid">
+            <div class="hobby-item">
+                <i class="fas fa-basketball-ball"></i>
+                <span>Basketball</span>
+            </div>
+            <div class="hobby-item">
+                <i class="fas fa-gamepad"></i>
+                <span>PC Gaming</span>
+            </div>
+            <div class="hobby-item">
+                <i class="fas fa-video"></i>
+                <span>Content Creation</span>
+            </div>
+            <div class="hobby-item">
+                <i class="fas fa-palette"></i>
+                <span>Painting</span>
+            </div>
+            <div class="hobby-item">
+                <i class="fas fa-book"></i>
+                <span>Reading</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact/Footer Section -->
+    <footer id="contact" class="footer">
+        <div class="footer-tagline">Let's build something great together.</div>
+        <div class="social-links">
+            <a href="mailto:zeelpatel0501@gmail.com" title="Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://linkedin.com/in/zeelpatel7" target="_blank" title="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="#" target="_blank" title="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+        <p style="color: var(--text-secondary); margin-top: 1rem;">
+            © 2025 Zeel Patel. Turning Data Into Strategy.
+        </p>
+    </footer>
+
+    <script>
+        // Typewriter Effect
+        const typewriter = document.getElementById('typewriter');
+        const text = 'Turning Data Into Strategy';
+        let i = 0;
+        let isDeleting = false;
+        let loopNum = 0;
+        const typingSpeed = 100;
+        const deletingSpeed = 50;
+        const pauseTime = 2000;
+
+        function typeEffect() {
+            const current = i;
+            const fullText = text;
+
+            if (!isDeleting) {
+                typewriter.textContent = fullText.substring(0, current + 1);
+                i++;
+                if (i === fullText.length) {
+                    setTimeout(() => isDeleting = true, pauseTime);
+                }
+            } else {
+                typewriter.textContent = fullText.substring(0, current - 1);
+                i--;
+                if (i === 0) {
+                    isDeleting = false;
+                    loopNum++;
+                }
+            }
+
+            const currentSpeed = isDeleting ? deletingSpeed : typingSpeed;
+            setTimeout(typeEffect, currentSpeed);
+        }
+
+        // Start typewriter effect
+        typeEffect();
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(30, 30, 30, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
+            } else {
+                navbar.style.background = 'rgba(30, 30, 30, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections and cards
+        document.querySelectorAll('.section, .skill-card, .project-card, .volunteer-card, .timeline-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Add bounce animation to hobby items
+        document.querySelectorAll('.hobby-item').forEach((item, index) => {
+            item.addEventListener('mouseenter', function() {
+                this.style.animation = 'bounce 0.6s ease';
+            });
+            
+            item.addEventListener('animationend', function() {
+                this.style.animation = '';
+            });
+        });
+
+        // Add CSS for bounce animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes bounce {
+                0%, 20%, 60%, 100% { transform: translateY(0); }
+                40% { transform: translateY(-20px); }
+                80% { transform: translateY(-10px); }
+            }
+            
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Add glitch effect to hero title on hover
+        const heroTitle = document.querySelector('.hero h1');
+        heroTitle.addEventListener('mouseenter', function() {
+            this.style.animation = 'glitch 0.3s ease-in-out';
+        });
+        
+        heroTitle.addEventListener('animationend', function() {
+            this.style.animation = '';
+        });
+
+        // Add glitch animation CSS
+        const glitchStyle = document.createElement('style');
+        glitchStyle.textContent = `
+            @keyframes glitch {
+                0% { transform: translateX(0); }
+                20% { transform: translateX(-2px); }
+                40% { transform: translateX(2px); }
+                60% { transform: translateX(-2px); }
+                80% { transform: translateX(2px); }
+                100% { transform: translateX(0); }
+            }
+        `;
+        document.head.appendChild(glitchStyle);
+
+        // Add particle effect to hero section
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.style.position = 'absolute';
+            particle.style.width = '2px';
+            particle.style.height = '2px';
+            particle.style.background = 'var(--accent-teal)';
+            particle.style.borderRadius = '50%';
+            particle.style.opacity = '0.7';
+            particle.style.animation = `float ${Math.random() * 3 + 2}s linear infinite`;
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = '100%';
+            
+            document.querySelector('.hero').appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 5000);
+        }
+
+        // Create floating particles
+        const particleStyle = document.createElement('style');
+        particleStyle.textContent = `
+            @keyframes float {
+                0% {
+                    transform: translateY(0) rotate(0deg);
+                    opacity: 0.7;
+                }
+                50% {
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(-100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(particleStyle);
+
+        // Create particles periodically
+        setInterval(createParticle, 2000);
+
+        // Add pulse effect to timeline dots
+        document.querySelectorAll('.timeline-item::before').forEach((dot, index) => {
+            setTimeout(() => {
+                const style = document.createElement('style');
+                style.textContent = `
+                    .timeline-item:nth-child(${index + 1})::before {
+                        animation: pulse 2s infinite;
+                    }
+                    
+                    @keyframes pulse {
+                        0% { box-shadow: 0 0 0 0 rgba(0, 191, 166, 0.7); }
+                        70% { box-shadow: 0 0 0 10px rgba(0, 191, 166, 0); }
+                        100% { box-shadow: 0 0 0 0 rgba(0, 191, 166, 0); }
+                    }
+                `;
+                document.head.appendChild(style);
+            }, index * 500);
+        });
+
+        console.log('🚀 Zeel Patel Portfolio Loaded Successfully!');
+        console.log('💡 Turning Data Into Strategy');
+    </script>
+</body>
+</html>
