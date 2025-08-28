@@ -6,6 +6,7 @@
     <title>Zeel Patel - Data Scientist</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Poppins:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
     <style>
         :root {
             --bg-primary: #1E1E1E;
@@ -528,9 +529,109 @@
             border-radius: 4px;
         }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-purple);
-        }
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--accent-purple);
+    }
+    </style>
+    <style>
+    /* Overlay */
+    #skills-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.6);
+      backdrop-filter:blur(2px);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .3s ease;
+      z-index:1000;
+    }
+    #skills-overlay.show{
+      opacity:1;
+      pointer-events:auto;
+    }
+
+    /* Skill card flip/modal */
+    .skill-card{
+      position:relative;
+      perspective:1000px;
+      cursor:pointer;
+      min-height:220px;
+      background:none;
+      padding:0;
+      border:0;
+    }
+    .skill-card .card-inner{
+      position:relative;
+      width:100%;
+      height:100%;
+      transform-style:preserve-3d;
+      transition:transform .6s ease;
+    }
+    .skill-card .card-face{
+      position:absolute;
+      top:0;left:0;
+      width:100%;height:100%;
+      backface-visibility:hidden;
+      border-radius:15px;
+      padding:2rem;
+    }
+    .skill-card .card-front{
+      background:var(--bg-secondary);
+      text-align:center;
+      border:2px solid transparent;
+      transition:all .3s ease;
+    }
+    .skill-card:hover:not(.is-focused) .card-front{
+      transform:translateY(-5px);
+      border-color:var(--accent-teal);
+      box-shadow:var(--glow-teal);
+    }
+    .skill-card .card-back{
+      background:#161616;
+      transform:rotateY(180deg);
+      overflow:auto;
+      border:1px solid #333;
+    }
+    .is-flipped .card-inner{transform:rotateY(180deg);}
+    .skill-card.is-focused{
+      position:fixed;
+      top:50%;left:50%;
+      transform:translate(-50%, -50%);
+      width:min(720px,92vw);
+      max-height:82vh;
+      z-index:1001;
+      box-shadow:0 20px 40px rgba(0,0,0,.8);
+    }
+    .tools-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+      gap:1rem;
+      margin-top:1.5rem;
+    }
+    .tool{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      font-size:.85rem;
+      gap:.25rem;
+    }
+    .card-close{
+      position:absolute;
+      top:.5rem;right:.5rem;
+      background:none;
+      border:none;
+      color:var(--text-secondary);
+      font-size:1.5rem;
+      cursor:pointer;
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .skill-card .card-inner,
+      #skills-overlay{
+        transition:none;
+      }
+    }
     </style>
 </head>
 <body>
@@ -576,35 +677,137 @@
                 <p>My edge lies at the intersection of analytics, engineering, and strategy — whether it's optimizing cloud platforms, leading AI integration sprints, or building systems that scale. I'm passionate about creating tools that empower people, not just process data.</p>
             </div>
             <div class="skills-grid">
-                <div class="skill-card">
-                    <i class="fas fa-brain"></i>
-                    <h3>Machine Learning & AI</h3>
-                    <p>PyTorch, TensorFlow, scikit-learn, XGBoost, Hugging Face</p>
+                <div class="skill-card" data-skill="ml-ai" tabindex="0">
+                    <div class="card-inner">
+                        <div class="card-face card-front">
+                            <i class="fas fa-brain"></i>
+                            <h3>Machine Learning &amp; AI</h3>
+                            <p>PyTorch, TensorFlow, scikit-learn, XGBoost, Hugging&nbsp;Face</p>
+                        </div>
+                        <div class="card-face card-back" role="dialog" aria-modal="true">
+                            <button class="card-close" aria-label="Close">&times;</button>
+                            <h3>Tools &amp; Frameworks</h3>
+                            <div class="tools-grid">
+                                <div class="tool"><i class="devicon-pytorch-plain colored"></i><span>PyTorch</span></div>
+                                <div class="tool"><i class="devicon-tensorflow-original colored"></i><span>TensorFlow</span></div>
+                                <div class="tool"><i class="devicon-scikitlearn-original colored"></i><span>scikit-learn</span></div>
+                                <div class="tool"><i class="devicon-xgboost-original colored"></i><span>XGBoost</span></div>
+                                <div class="tool"><i class="devicon-huggingface-original colored"></i><span>Hugging&nbsp;Face</span></div>
+                                <div class="tool"><i class="devicon-jupyter-plain colored"></i><span>Jupyter</span></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="skill-card">
-                    <i class="fas fa-chart-bar"></i>
-                    <h3>Applied Analytics</h3>
-                    <p>Python, SQL, R, Tableau, Power BI</p>
+
+                <div class="skill-card" data-skill="applied-analytics" tabindex="0">
+                    <div class="card-inner">
+                        <div class="card-face card-front">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>Applied Analytics</h3>
+                            <p>Python, R, Tableau, Power&nbsp;BI, SQL</p>
+                        </div>
+                        <div class="card-face card-back" role="dialog" aria-modal="true">
+                            <button class="card-close" aria-label="Close">&times;</button>
+                            <h3>Tools &amp; Frameworks</h3>
+                            <div class="tools-grid">
+                                <div class="tool"><i class="devicon-python-plain colored"></i><span>Python</span></div>
+                                <div class="tool"><i class="devicon-r-original colored"></i><span>R</span></div>
+                                <div class="tool"><i class="devicon-tableau-plain colored"></i><span>Tableau</span></div>
+                                <div class="tool"><i class="devicon-powerbi-plain colored"></i><span>Power&nbsp;BI</span></div>
+                                <div class="tool"><i class="devicon-postgresql-plain colored"></i><span>PostgreSQL</span></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="skill-card">
-                    <i class="fas fa-tools"></i>
-                    <h3>Data Science Toolkit</h3>
-                    <p>Data wrangling, EDA, Statistical modeling</p>
+
+                <div class="skill-card" data-skill="ds-toolkit" tabindex="0">
+                    <div class="card-inner">
+                        <div class="card-face card-front">
+                            <i class="fas fa-toolbox"></i>
+                            <h3>Data Science Toolkit</h3>
+                            <p>pandas, NumPy, Matplotlib, Seaborn, SciPy</p>
+                        </div>
+                        <div class="card-face card-back" role="dialog" aria-modal="true">
+                            <button class="card-close" aria-label="Close">&times;</button>
+                            <h3>Tools &amp; Frameworks</h3>
+                            <div class="tools-grid">
+                                <div class="tool"><i class="devicon-pandas-original colored"></i><span>pandas</span></div>
+                                <div class="tool"><i class="devicon-numpy-original colored"></i><span>NumPy</span></div>
+                                <div class="tool"><i class="devicon-matplotlib-plain colored"></i><span>Matplotlib</span></div>
+                                <div class="tool"><i class="fas fa-chart-area"></i><span>Seaborn</span></div>
+                                <div class="tool"><i class="devicon-scipy-plain colored"></i><span>SciPy</span></div>
+                                <div class="tool"><i class="devicon-git-plain colored"></i><span>Git</span></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="skill-card">
-                    <i class="fas fa-rocket"></i>
-                    <h3>MLOps & Data Engineering</h3>
-                    <p>PySpark, BigQuery, Hadoop, GCP, AWS, Docker</p>
+
+                <div class="skill-card" data-skill="mlops-dataeng" tabindex="0">
+                    <div class="card-inner">
+                        <div class="card-face card-front">
+                            <i class="fas fa-cogs"></i>
+                            <h3>MLOps &amp; Data Engineering</h3>
+                            <p>Spark, Airflow, MLflow, Docker, Kubernetes</p>
+                        </div>
+                        <div class="card-face card-back" role="dialog" aria-modal="true">
+                            <button class="card-close" aria-label="Close">&times;</button>
+                            <h3>Tools &amp; Frameworks</h3>
+                            <div class="tools-grid">
+                                <div class="tool"><i class="devicon-apachespark-original colored"></i><span>Apache&nbsp;Spark</span></div>
+                                <div class="tool"><i class="devicon-airflow-plain colored"></i><span>Airflow</span></div>
+                                <div class="tool"><i class="fas fa-flask"></i><span>MLflow</span></div>
+                                <div class="tool"><i class="devicon-docker-plain colored"></i><span>Docker</span></div>
+                                <div class="tool"><i class="devicon-kubernetes-plain colored"></i><span>Kubernetes</span></div>
+                                <div class="tool"><i class="devicon-googlecloud-plain colored"></i><span>Google&nbsp;Cloud</span></div>
+                                <div class="tool"><i class="devicon-amazonwebservices-original colored"></i><span>AWS</span></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="skill-card">
-                    <i class="fas fa-cloud"></i>
-                    <h3>Cloud & Systems</h3>
-                    <p>GCP, AWS, Big Data infrastructure, HPC</p>
+
+                <div class="skill-card" data-skill="cloud-systems" tabindex="0">
+                    <div class="card-inner">
+                        <div class="card-face card-front">
+                            <i class="fas fa-cloud"></i>
+                            <h3>Cloud &amp; Systems</h3>
+                            <p>GCP, AWS, Linux, Bash, Hadoop</p>
+                        </div>
+                        <div class="card-face card-back" role="dialog" aria-modal="true">
+                            <button class="card-close" aria-label="Close">&times;</button>
+                            <h3>Tools &amp; Frameworks</h3>
+                            <div class="tools-grid">
+                                <div class="tool"><i class="devicon-googlecloud-plain colored"></i><span>Google&nbsp;Cloud</span></div>
+                                <div class="tool"><i class="devicon-amazonwebservices-original colored"></i><span>AWS</span></div>
+                                <div class="tool"><i class="devicon-linux-plain colored"></i><span>Linux</span></div>
+                                <div class="tool"><i class="devicon-bash-plain colored"></i><span>Bash</span></div>
+                                <div class="tool"><i class="devicon-hadoop-plain colored"></i><span>Hadoop</span></div>
+                                <div class="tool"><i class="devicon-apache-plain colored"></i><span>Apache</span></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="skill-card">
-                    <i class="fas fa-star"></i>
-                    <h3>Miscellaneous Skills</h3>
-                    <p>GitHub, JIRA, Confluence, Agile, Leadership, Public Speaking</p>
+
+                <div class="skill-card" data-skill="misc" tabindex="0">
+                    <div class="card-inner">
+                        <div class="card-face card-front">
+                            <i class="fas fa-magic"></i>
+                            <h3>Miscellaneous Skills</h3>
+                            <p>GitHub, Jira, Confluence, Figma, VS&nbsp;Code</p>
+                        </div>
+                        <div class="card-face card-back" role="dialog" aria-modal="true">
+                            <button class="card-close" aria-label="Close">&times;</button>
+                            <h3>Tools &amp; Frameworks</h3>
+                            <div class="tools-grid">
+                                <div class="tool"><i class="devicon-github-original colored"></i><span>GitHub</span></div>
+                                <div class="tool"><i class="devicon-jira-plain colored"></i><span>Jira</span></div>
+                                <div class="tool"><i class="devicon-confluence-original colored"></i><span>Confluence</span></div>
+                                <div class="tool"><i class="devicon-figma-plain colored"></i><span>Figma</span></div>
+                                <div class="tool"><i class="devicon-vscode-plain colored"></i><span>VS&nbsp;Code</span></div>
+                                <div class="tool"><i class="fas fa-microphone"></i><span>Public&nbsp;Speaking</span></div>
+                                <div class="tool"><i class="fas fa-book"></i><span>Writing</span></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -850,6 +1053,82 @@
             © 2025 Zeel Patel. Turning Data Into Strategy.
         </p>
     </footer>
+
+    <div id="skills-overlay" aria-hidden="true"></div>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const overlay = document.getElementById('skills-overlay');
+      const cards = document.querySelectorAll('.skill-card');
+      let lastFocused;
+
+      function trapFocus(e){
+        const openCard = document.querySelector('.skill-card.is-focused');
+        if(!openCard) return;
+        const focusable = openCard.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        if(focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if(e.key === 'Tab'){
+          if(e.shiftKey){
+            if(document.activeElement === first){
+              e.preventDefault();
+              last.focus();
+            }
+          }else{
+            if(document.activeElement === last){
+              e.preventDefault();
+              first.focus();
+            }
+          }
+        }else if(e.key === 'Escape'){
+          closeCard();
+        }
+      }
+
+      function openCard(card){
+        if(card.classList.contains('is-focused')) return;
+        lastFocused = document.activeElement;
+        card.classList.add('is-flipped','is-focused');
+        overlay.classList.add('show');
+        overlay.setAttribute('aria-hidden','false');
+        document.body.style.overflow = 'hidden';
+        document.addEventListener('keydown', trapFocus);
+        const closeBtn = card.querySelector('.card-close');
+        closeBtn.focus();
+      }
+
+      function closeCard(){
+        const openCard = document.querySelector('.skill-card.is-focused');
+        if(!openCard) return;
+        openCard.classList.remove('is-flipped','is-focused');
+        overlay.classList.remove('show');
+        overlay.setAttribute('aria-hidden','true');
+        document.body.style.overflow = '';
+        document.removeEventListener('keydown', trapFocus);
+        if(lastFocused) lastFocused.focus();
+      }
+
+      cards.forEach(card => {
+        const closeBtn = card.querySelector('.card-close');
+
+        card.addEventListener('click', () => openCard(card));
+
+        card.addEventListener('keydown', e => {
+          if(e.key === 'Enter' || e.key === ' '){
+            e.preventDefault();
+            openCard(card);
+          }
+        });
+
+        closeBtn.addEventListener('click', e => {
+          e.stopPropagation();
+          closeCard();
+        });
+      });
+
+      overlay.addEventListener('click', closeCard);
+    });
+    </script>
 
     <script>
         // Typewriter Effect
